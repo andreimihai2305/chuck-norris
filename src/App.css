@@ -2,14 +2,15 @@
 /* font-family: 'Cabin', sans-serif; */
 
 header {
-  margin-top: 3rem;
+  margin-top: 1rem;
   margin-left: 1rem;
 }
 
 h1 {
+  margin-bottom: 0.5rem;
   font-family: 'Bebas Neue', cursive;
   font-size: 4rem;
-  margin: 1.3rem 0;
+
 }
 
 button {
@@ -30,6 +31,7 @@ button:active {
 
 }
 .App {
+  /* padding-top: 0; */
   margin-bottom: 2em;
 }
  
