@@ -1,12 +1,15 @@
 import './App.css';
 import React, { Component } from 'react';
 import Fact from './components/Fact';
+import Dropdown from './components/Dropdown';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      data: {}
+      data: {},
+      currentCategory: "all",
+      categories: ["animal","career","celebrity","dev","explicit","fashion","food","history","money","movie","music","political","religion","science","sport","travel"]
     }
   }
 
@@ -18,28 +21,40 @@ class App extends Component {
   
 
   handleButtonClick = () => {
-    this.getFact();
+    this.getFact(this.state.currentCategory);
+  }
+
+  handleCategorySelect = (event) => {
+    this.setState({ currentCategory: event.target.value });
+    
+
   }
   
-  getFact = () => {
-    fetch("https://api.chucknorris.io/jokes/random").then(res => res.json()).then(data => this.setState({ data: data }));
+  getFact = (category="all") => {
+    if (category !== "all") fetch(`https://api.chucknorris.io/jokes/random?category=${category}`).then(res => res.json()).then(data => this.setState({ data: data }));
     
+    else fetch("https://api.chucknorris.io/jokes/random").then(res => res.json()).then(data => this.setState({ data: data }));
+    console.log(this.state.currentCategory);
   }
+  
   
 
   render() {
     let { value } = this.state.data;
+    const { categories } = this.state;
     if (!value) value = "Please wait...";
-    // console.log(value);
     return (
       <div className="App">
         <header>
           <h1>Chuck Norris Facts</h1>
-          <button onClick={this.handleButtonClick}>Get Fact</button>
+          <div>
+            <Dropdown onSelect={this.handleCategorySelect} categories={categories}/>
+            <button onClick={this.handleButtonClick}>Get Fact</button>
+          </div>
         </header>
-        <div>
-          <Fact text={value.toString()}></Fact>
-        </div>
+        <main>
+          <Fact text={value}></Fact>
+        </main>
       </div>
     );
   }
