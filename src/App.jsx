@@ -34,7 +34,6 @@ class App extends Component {
     if (category !== "all") fetch(`https://api.chucknorris.io/jokes/random?category=${category}`).then(res => res.json()).then(data => this.setState({ data: data }));
     
     else fetch("https://api.chucknorris.io/jokes/random").then(res => res.json()).then(data => this.setState({ data: data }));
-    console.log(this.state.currentCategory);
   }
   
   
