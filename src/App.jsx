@@ -52,7 +52,7 @@ class App extends Component {
           </div>
         </header>
         <main>
-          <Fact text={value}></Fact>
+          <Fact text={value} />
         </main>
       </div>
     );
